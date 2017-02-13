@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="ShoppingListApp">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>ng-repeat/search</title>
+  </head>
+  <body>
+
+    <!-- To search from list -->
+    <h1>ng-repeat/search</h1>
+    <div ng-controller='ShopingListController'>
+      <h3>Shopping List :</h3>
+      <input type="text" ng-model="search">
+      <ul>
+        <li ng-repeat="item in shoppingList | filter :search">{{ item }}</li>
+      </ul>
+    </div>
+    <!-- To search from list ends heare -->
+  </body>
+</html>
