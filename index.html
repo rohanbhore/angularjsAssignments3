@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<html ng-app="ShoppingListApp">
+<!doctype html>
+<html lang="en" ng-app='NarrowItDownApp'>
   <head>
-    <meta charset="utf-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="app.js"></script>
-    <title>ng-repeat/search</title>
+    <title>Narrow Down Your Menu Choice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-
-    <!-- To search from list -->
-    <h1>ng-repeat/search</h1>
-    <div ng-controller='ShopingListController'>
-      <h3>Shopping List :</h3>
-      <input type="text" ng-model="search">
-      <ul>
-        <li ng-repeat="item in shoppingList | filter :search">{{ item }}</li>
+   <div class="container">
+    <h1>Narrow Down Your Chinese Menu Choice</h1>
+    <ul>
+      <span class="form-group">Enter Menu
+        <input type="text"  ng-model="search" placeholder="search term" class="form-control">
+      </span>
+    </ul>
+    <div class="form-group narrow-button">
+      <div ng-controller='NarrowItDownController as menu'>
+        <button ng-click class="btn btn-primary">Narrow It Down For Me!</button>
+      <li ng-repeat="item in menu_items | filter :search">{{ description }}
+      <button ng-click='list.removeItem($itemIndex)'>removeItem</button>
+        </li>
       </ul>
+      </div>
     </div>
-    <!-- To search from list ends heare -->
+  </div>
+
   </body>
 </html>

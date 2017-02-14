@@ -1,16 +1,53 @@
 (function(){
-'use strict'
+'use strict';
+angular.module('NarrowItDownApp',[])
+.controller('NarrowItDownController',NarrowItDownController)
+.service('MenuSearchService',MenuSearchService)
+.directive('foundItems',FoundItemsDirective);
 
-  var shoppingList=["milk","peanut","peanut cookies","peanut banana","greaph"];
-
-
-  angular.module('ShoppingListApp',[])
-  .controller('ShopingListController',ShopingListController);
-  ShopingListController.$inject=['$scope'];
-
-    function ShopingListController($scope)
-
+function FoundItemsDirective()
+{
+  var ddo=
+  {
+    scope:
     {
-      $scope.shoppingList=shoppingList;
+      items:'<',
+
     }
+  }
+}
+
+NarrowItDownController.$inject=[MenuSearchService];
+function NarrowItDownController(MenuSearchService)
+{
+  var menu=this;
+
+  var promise=MenuSearchService.getMatchedMenuItems();
+  promise.then(function(response){
+  menu.found=response.data;//cond
+  })
+  .catch(function(error){
+    console.log("Somethig went wrong");
+  });
+}
+MenuSearchService.$inject=['$http'];
+
+function MenuSearchService($http)
+{
+  var service=this;
+
+  service.getMatchedMenuItems=function()
+  {
+    var response=$http({
+      method:"GET",
+      url:("https://davids-restaurant.herokuapp.com/menu_items.json")
+    });
+    return response;
+  };
+  service.removeItem=function(itemIndex)
+  {
+    found.splice(itemIndex, 1);
+  };
+}
+
 })();
